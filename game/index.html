@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tailwind: Archipelago Flight</title>
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+<body>
+  <div id="viewport">
+    <canvas id="flight-gl"></canvas>
+    <canvas id="flight-hud"></canvas>
+
+    <div id="top-actions" class="hidden">
+      <button id="btn-missions" class="chip-btn" type="button" title="Select Mission (Tab)">Missions [Tab]</button>
+      <button id="btn-camera" class="chip-btn" type="button" title="Toggle View (V)">View [V]</button>
+      <button id="btn-audio" class="chip-btn" type="button" title="Mute / Unmute Audio (M)">Audio [M]</button>
+      <button id="btn-pause" class="chip-btn" type="button" title="Pause & Controls (P)">Pause [P]</button>
+    </div>
+
+    <section id="title-overlay" class="overlay-backdrop">
+      <div class="glass-card title-card">
+        <div class="eyebrow">XF-27 KESTREL · ARCHIPELAGO FLIGHT OPS</div>
+        <h1>TAILWIND</h1>
+        <p class="subtitle">
+          Six-degree-of-freedom WebGL2 flight across snow-capped fjords, river canyons,
+          storm squalls, and carrier arrestor landings. Manage throttle, fuel, and hull integrity.
+        </p>
+
+        <div class="mission-grid" id="title-mission-list"></div>
+
+        <div class="title-footer">
+          <div class="controls-strip">
+            <span><strong>W / S</strong> Pitch</span>
+            <span><strong>A / D</strong> Roll</span>
+            <span><strong>Q / E</strong> Rudder</span>
+            <span><strong>Shift / Ctrl</strong> Throttle</span>
+            <span><strong>Space</strong> Afterburner</span>
+            <span><strong>G</strong> Gear</span>
+            <span><strong>B</strong> Flaps</span>
+            <span><strong>V</strong> Cockpit / Chase</span>
+            <span><strong>C</strong> Drop Cargo</span>
+          </div>
+          <div class="title-cta-row">
+            <label class="toggle-pill">
+              <input id="chk-mouse-yoke" type="checkbox" />
+              <span>Mouse Yoke</span>
+            </label>
+            <label class="toggle-pill">
+              <input id="chk-invert-pitch" type="checkbox" />
+              <span>Invert Pitch</span>
+            </label>
+            <label class="toggle-pill">
+              <input id="chk-reduced-shake" type="checkbox" />
+              <span>Reduced Shake</span>
+            </label>
+            <button id="btn-launch-sortie" class="primary-btn" type="button">Launch Sortie</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="pause-overlay" class="overlay-backdrop hidden">
+      <div class="glass-card modal-card">
+        <h2 id="pause-heading">SORTIE PAUSED</h2>
+        <p id="pause-summary" class="subtitle"></p>
+        <div class="controls-table">
+          <div><strong>W / S / Up / Down</strong><span>Pitch Nose</span></div>
+          <div><strong>A / D / Left / Right</strong><span>Roll Wings</span></div>
+          <div><strong>Q / E</strong><span>Rudder Yaw</span></div>
+          <div><strong>Shift / Ctrl (or R / F)</strong><span>Throttle Up / Down</span></div>
+          <div><strong>Space</strong><span>Afterburner Boost (High Fuel Burn)</span></div>
+          <div><strong>G / B</strong><span>Toggle Landing Gear / Flaps</span></div>
+          <div><strong>V</strong><span>Switch Chase / 3D Cockpit View</span></div>
+          <div><strong>C</strong><span>Release Cargo Crate (Supply Mission)</span></div>
+          <div><strong>Tab / M</strong><span>Mission Select / Mute Audio</span></div>
+        </div>
+        <div class="modal-actions">
+          <button id="btn-resume" class="primary-btn" type="button">Resume Flight</button>
+          <button id="btn-restart" class="secondary-btn" type="button">Restart Sortie</button>
+          <button id="btn-to-menu" class="secondary-btn" type="button">Mission Menu</button>
+        </div>
+      </div>
+    </section>
+
+    <section id="debrief-overlay" class="overlay-backdrop hidden">
+      <div class="glass-card modal-card">
+        <div id="debrief-badge" class="debrief-badge">SORTIE DEBRIEF</div>
+        <h2 id="debrief-title">MISSION COMPLETE</h2>
+        <p id="debrief-reason" class="subtitle"></p>
+        <div id="debrief-metrics" class="debrief-grid"></div>
+        <div class="modal-actions">
+          <button id="btn-retry-sortie" class="primary-btn" type="button">Fly Again</button>
+          <button id="btn-next-sortie" class="secondary-btn" type="button">Next Mission</button>
+          <button id="btn-debrief-menu" class="secondary-btn" type="button">Mission Menu</button>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script type="module" src="./src/main.js"></script>
+</body>
+</html>
